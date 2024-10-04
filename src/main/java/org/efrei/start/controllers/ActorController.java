@@ -1,5 +1,6 @@
 package org.efrei.start.controllers;
 
+import org.efrei.start.dto.CreateActor;
 import org.efrei.start.models.Actor;
 import org.efrei.start.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,39 +13,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/actors")
 public class ActorController {
-
     private final ActorService service;
 
     @Autowired
-    public ActorController(ActorService service) {
-        this.service = service;
+    public ActorController(ActorService service){
+        this.service =service;
     }
-
 
     @GetMapping
     public ResponseEntity<List<Actor>> findAll(){
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
+    @PostMapping
+    public  ResponseEntity<?> create(@RequestBody CreateActor createActor){
+        service.create(createActor);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Actor> findByAll(@PathVariable String id) {
-        Actor actor = service.findById(id);
-        if(actor == null) {
+    public ResponseEntity<Actor> findById(@PathVariable String id){
+        Actor actor=service.findById(id);
+        if(actor == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody Actor actor){
-        service.create(actor);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable String id){
         Actor actor = service.findById(id);
-        if(actor == null) {
+        if (actor == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         service.deleteById(id);
@@ -52,8 +50,8 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody Actor actor) {
-        service.update(id, actor);
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody Actor actor){
+        service.updateActor(id,actor);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

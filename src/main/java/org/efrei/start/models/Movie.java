@@ -1,50 +1,55 @@
 package org.efrei.start.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.efrei.start.global.Category;
+
 
 @Entity
-@Table(name="movie")
 public class Movie {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+
     private String title;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @OneToOne
     private Actor actor;
 
-
-    public Movie(String title){
-        this.title = title;
-    }
-
-    public Movie() {}
-
-    public String getMovieName(){
-        return title;
-    }
-
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public void setMovieTitle(String title){
+    public String getTitle() {
+        return title;
+    }
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setId(String id){
-        this.id = id;
+    public void setActor(Actor actor) {
+        this.actor = actor;
     }
 
 }
