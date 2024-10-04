@@ -1,10 +1,10 @@
 package org.efrei.start.services;
 
 import org.efrei.start.dto.CreateActor;
-import org.efrei.start.dto.CreateMovie;
 import org.efrei.start.models.Actor;
 import org.efrei.start.models.Movie;
 import org.efrei.start.repositories.ActorRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,7 @@ public class ActorService {
         return (List<Actor>) repository.findAll();
     }
 
+    //CREATE ACTOR
     public void create(CreateActor createActor){
         Actor actor = new Actor();
         Movie movie = movieService.findById(createActor.getMovieId());
@@ -38,10 +39,12 @@ public class ActorService {
         return repository.findById(id).orElse(null);
     }
 
+    //DELETE BY ID
     public void deleteById(String id){
         repository.deleteById(id);
     }
 
+    //UPDATE ACTOR
     public void updateActor(String id, Actor actor){
         Actor updateActor = findById(id);
         updateActor.setName((actor.getName()));

@@ -1,3 +1,4 @@
+
 package org.efrei.start.models;
 
 import jakarta.persistence.*;
@@ -17,9 +18,7 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToOne
-    private Actor actor;
-
+    //GETTER AND SETTER
     public String getId() {
         return id;
     }
@@ -28,9 +27,6 @@ public class Movie {
         return title;
     }
 
-    public Actor getActor() {
-        return actor;
-    }
 
     public Category getCategory() {
         return category;
@@ -48,8 +44,5 @@ public class Movie {
         this.title = title;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
 
 }

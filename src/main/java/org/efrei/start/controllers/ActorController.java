@@ -3,7 +3,9 @@ package org.efrei.start.controllers;
 import org.efrei.start.dto.CreateActor;
 import org.efrei.start.models.Actor;
 import org.efrei.start.services.ActorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ public class ActorController {
 
     @Autowired
     public ActorController(ActorService service){
-        this.service =service;
+        this.service=service;
     }
 
     @GetMapping
@@ -33,7 +35,7 @@ public class ActorController {
     @GetMapping("/{id}")
     public ResponseEntity<Actor> findById(@PathVariable String id){
         Actor actor=service.findById(id);
-        if(actor == null){
+        if(actor==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
@@ -41,8 +43,8 @@ public class ActorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable String id){
-        Actor actor = service.findById(id);
-        if (actor == null){
+        Actor actor=service.findById(id);
+        if (actor==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         service.deleteById(id);
